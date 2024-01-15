@@ -1,4 +1,4 @@
-#### **Driver Behaviour Prediction using OBD data**
+# **Driver Behaviour Prediction using OBD data**
 
 ## Driver behaviour has been predicted using OBD data collected from truck.
 
