@@ -22,10 +22,10 @@
 ![image](https://github.com/rohit-dudhal/driver-behaviour-production-using-obd/assets/61742890/86854eaa-4e71-4c90-adaa-29051f7cd3df)
 
 ## To run project follow below steps:
-  ### - Clone the repository.
-  ### - Import the requirements from requirements.txt file.
-  ### - run app.py file
-  ### - Lanuch index.html file. Try changing values and see driver classication.
+  #### - Clone the repository.
+  #### - Import the requirements from requirements.txt file.
+  #### - run app.py file
+  #### - Lanuch index.html file. Try changing values and see driver classication.
 
 ## Example:
 
