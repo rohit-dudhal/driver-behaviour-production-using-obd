@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Prediction UI</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200vh;
+            margin: 0;
+            flex-direction: column;
+            background-color: #f8f9fa; /* Bootstrap background color */
+        }
+
+        form {
+            background-color: #ffffff; /* Bootstrap card background color */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da; /* Bootstrap input border color */
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        h2,
+        h3 {
+            text-align: center;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #resultValue {
+            font-weight: bold;
+            color: #28a745; /* Bootstrap success text color */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="my-4">Driver Behaviour Prediction</h2>
+        <form>
+            <div class="form-group">
+                <label for="fuelConsumption">Fuel Consumption:</label>
+                <input type="number" class="form-control" id="fuelConsumption" value="268.8">
+            </div>
+            <div class="form-group">
+                <label for="absoluteThrottle">Absolute Throttle Position:</label>
+                <input type="number" class="form-control" id="absoluteThrottle" value="13.3">
+            </div>
+            <div class="form-group">
+                <label for="engineSpeed">Engine Speed:</label>
+                <input type="number" class="form-control" id="engineSpeed" value="929">
+            </div>
+            <div class="form-group">
+                <label for="currentGear">Current Gear:</label>
+                <input type="number" class="form-control" id="currentGear" value="0">
+            </div>
+            <div class="form-group">
+                <label for="steeringWheelAngle">Steering Wheel Angle:</label>
+                <input type="number" class="form-control" id="steeringWheelAngle" value="-3.4">
+            </div>
+            <div class="form-group">
+                <label for="steeringWheelSpeed">Steering Wheel Speed:</label>
+                <input type="number" class="form-control" id="steeringWheelSpeed" value="0">
+            </div>
+            <div class="form-group">
+                <label for="longitudinalAcceleration">Acceleration Speed (Longitudinal):</label>
+                <input type="number" class="form-control" id="longitudinalAcceleration" value="-8.5">
+            </div>
+            <div class="form-group">
+                <label for="calculatedLoad">Calculated LOAD value:</label>
+                <input type="number" class="form-control" id="calculatedLoad" value="23.9">
+            </div>
+            <div class="form-group">
+                <label for="coolantTemperature">Engine Coolant Temperature:</label>
+                <input type="number" class="form-control" id="coolantTemperature" value="35">
+            </div>
+            <div class="form-group">
+                <label for="airCompressorActivation">Activation of Air Compressor:</label>
+                <input type="number" class="form-control" id="airCompressorActivation" value="0">
+            </div>
+            <div class="form-group">
+                <label for="vehicleSpeed">Vehicle Speed:</label>
+                <input type="number" class="form-control" id="vehicleSpeed" value="0">
+            </div>
+            <div class="form-group">
+                <label for="brakeSwitch">Indication of Brake Switch ON/OFF:</label>
+                <input type="number" class="form-control" id="brakeSwitch" value="1">
+            </div>
+            <div class="form-group">
+                <label for="vehicleClass">Class:</label>
+                <input type="text" class="form-control" id="vehicleClass" value="0">
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="predict()">Predict</button>
+
+            <div id="result">
+                
+
+                <h3>Result: <p id="resultValue"></p></h3>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        async function predict() {
+            const inputValues = {
+                "Fuel_consumption": document.getElementById('fuelConsumption').value,
+                "Absolute_throttle_position": document.getElementById('absoluteThrottle').value,
+                "Engine_speed": document.getElementById('engineSpeed').value,
+                "Current_Gear": document.getElementById('currentGear').value,
+                "Steering_wheel_angle": document.getElementById('steeringWheelAngle').value,
+                "Steering_wheel_speed": document.getElementById('steeringWheelSpeed').value,
+                "Acceleration_speed_-_Longitudinal": document.getElementById('longitudinalAcceleration').value,
+                "Calculated_LOAD_value": document.getElementById('calculatedLoad').value,
+                "Engine_coolant_temperature": document.getElementById('coolantTemperature').value,
+                "Activation_of_Air_compressor": document.getElementById('airCompressorActivation').value,
+                "Vehicle_speed": document.getElementById('vehicleSpeed').value,
+                "Indication_of_brake_switch_ON/OFF": document.getElementById('brakeSwitch').value,
+                "Class": document.getElementById('vehicleClass').value
+            };
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/predict_cluster', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(inputValues),
+                });
+
+                const result = await response.json();
+                console.log(result);
+                // Display the result
+                document.getElementById('resultValue').innerText = result.predicted_cluster;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('resultValue').innerText = 'Error occurred. Please check the console for details.';
+            }
+        }
+    </script>
+</body>
+
+</html>
